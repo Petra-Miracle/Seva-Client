@@ -56,3 +56,7 @@
 ✓ Compiled in 89ms
  GET /chat 200 in 95ms (next.js: 6ms, application-code: 89ms)
  GET /dashboard 200 in 123ms (next.js: 5ms, application-code: 119ms)
+ GET /chat 200 in 84ms (next.js: 2ms, application-code: 82ms)
+ GET /chat 200 in 122ms (next.js: 7ms, application-code: 114ms)
+ GET /chat 200 in 91ms (next.js: 1.9ms, application-code: 89ms)
+ GET /dashboard 200 in 67ms (next.js: 2ms, application-code: 65ms)
