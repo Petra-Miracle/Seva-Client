@@ -1,0 +1,48 @@
+
+> seva-frontend-tmp@0.1.0 dev
+> next dev
+
+▲ Next.js 16.4.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.94.52.185:3000
+- Environments: .env.local
+✓ Ready in 716ms
+✓ Running next.config.ts took 67ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+○ Compiling /dashboard ...
+ GET /dashboard 200 in 775ms (next.js: 26ms, application-code: 749ms)
+ GET /dashboard 200 in 414ms (next.js: 10ms, application-code: 404ms)
+ GET /chat 200 in 1723ms (next.js: 757ms, application-code: 966ms)
+ GET /dashboard 200 in 295ms (next.js: 3ms, application-code: 292ms)
+ GET /chat 200 in 74ms (next.js: 5ms, application-code: 69ms)
+ GET /dashboard 200 in 101ms (next.js: 4ms, application-code: 97ms)
+ GET /chat 200 in 112ms (next.js: 3ms, application-code: 109ms)
+ GET /chat 200 in 152ms (next.js: 10ms, application-code: 141ms)
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\use-sync-external-store").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (1.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\react-aria-components\\dist\\private\\intl\\ar-AE.cjs").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (3.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\framer-motion\\dist\\size-rollup-m-dom-max.js").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (7.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\react-aria-components\\dist\\exports").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (15.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\framer-motion\\dist\\es\\gestures\\drag\\use-drag-controls.mjs.map").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (31.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\react-aria-components\\dist\\exports\\RadioGroup.cjs.map").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\react-aria\\private\\utils\\useDescription\\package.json").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\react-aria\\i18n\\bg-BG.mjs").
+ GET /dashboard 200 in 78ms (next.js: 5ms, application-code: 73ms)
+ GET /inbox 200 in 72ms (next.js: 22ms, application-code: 49ms)
+✓ Compiled in 17.8s
+✓ Compiled in 2.1s
+✓ Compiled in 163ms
+ GET /chat 500 in 2.6s (next.js: 2.2s, application-code: 394ms)
+ GET /chat 500 in 76ms (next.js: 41ms, application-code: 35ms)
+✓ Compiled in 7s
+✓ Compiled in 510ms
+ GET /chat 200 in 557ms (next.js: 23ms, application-code: 534ms)
+✓ Compiled in 404ms
+ GET /dashboard 200 in 232ms (next.js: 32ms, application-code: 199ms)
+ GET /dashboard 200 in 89ms (next.js: 10ms, application-code: 79ms)
+ GET /chat 200 in 391ms (next.js: 4ms, application-code: 387ms)
+✓ Compiled in 109ms
+✓ Compiled in 98ms
+✓ Compiled in 64ms
+✓ Compiled in 104ms
