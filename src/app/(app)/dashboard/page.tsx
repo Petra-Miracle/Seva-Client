@@ -49,7 +49,7 @@ export default function DashboardPage() {
               <button key={p} onClick={() => setPeriod(p)} className={`px-3 py-1.5 text-sm ${period === p ? "bg-accent-soft text-accent-strong font-semibold" : "text-text-secondary"}`}>{p} hari</button>
             ))}
           </div>
-          <Chip size="sm" color="success" variant="flat" className="gap-1">
+          <Chip size="sm" color="success" variant="soft" className="gap-1">
             <span className="w-2 h-2 rounded-full bg-success-fg" /> Live
           </Chip>
         </div>

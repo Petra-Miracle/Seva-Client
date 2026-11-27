@@ -68,11 +68,11 @@ export default function ChatPage() {
     <div className="flex h-screen bg-canvas">
       <aside className="w-72 bg-surface border-r border-border flex flex-col">
         <div className="p-4">
-          <Button color="primary" className="w-full" onPress={() => startConv(profile)}>Percakapan baru</Button>
+          <Button variant="primary" className="w-full" onPress={() => startConv(profile)}>Percakapan baru</Button>
         </div>
         <div className="px-4 flex gap-2">
           {["baru", "aktif", "pasif"].map((p) => (
-            <Button key={p} size="sm" variant={profile === p ? "solid" : "bordered"} color="primary" className="flex-1" onPress={() => startConv(p)}>
+            <Button key={p} size="sm" variant={profile === p ? "primary" : "secondary"} className="flex-1" onPress={() => startConv(p)}>
               {p === "baru" ? "Baru" : p === "aktif" ? "Aktif" : "Pasif"}
             </Button>
           ))}
@@ -92,8 +92,8 @@ export default function ChatPage() {
         <header className="bg-surface border-b border-border px-6 py-3 flex items-center justify-between">
           <span className="font-semibold text-sm">{partnerName}</span>
           <div className="flex items-center gap-3">
-            <Chip size="sm" variant="flat" className="bg-canvas text-text-secondary">Data demo</Chip>
-            <Chip size="sm" color="primary" variant="flat">Ditangani Bot</Chip>
+            <Chip size="sm" variant="soft">Data demo</Chip>
+            <Chip size="sm" color="accent" variant="soft">Ditangani Bot</Chip>
           </div>
         </header>
 
@@ -109,11 +109,13 @@ export default function ChatPage() {
                     { label: "Lapor gangguan" },
                     { label: "Tanya lainnya" },
                   ].map((s) => (
-                    <Card key={s.label} isPressable onPress={() => sendText(s.label)} className="hover:border-accent">
-                      <CardContent className="p-4">
-                        <div className="text-sm font-semibold text-text-primary">{s.label}</div>
-                      </CardContent>
-                    </Card>
+                    <button key={s.label} onClick={() => sendText(s.label)} className="text-left">
+                      <Card className="hover:border-accent cursor-pointer">
+                        <CardContent className="p-4">
+                          <div className="text-sm font-semibold text-text-primary">{s.label}</div>
+                        </CardContent>
+                      </Card>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -145,7 +147,7 @@ export default function ChatPage() {
                 <Avatar size="sm" className="bg-accent-soft">
                   <AvatarFallback>S</AvatarFallback>
                 </Avatar>
-                <Spinner size="sm" color="primary" />
+                <Spinner size="sm" color="accent" />
                 <span className="text-sm text-text-secondary">SevaAI sedang memproses...</span>
               </div>
             )}
