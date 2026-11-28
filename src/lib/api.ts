@@ -1,4 +1,5 @@
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+// Strip trailing slashes so "https://x.app/" + "/api/..." never becomes "//api/...".
+const API = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000").replace(/\/+$/, "");
 
 export async function api<T = unknown>(path: string, options?: RequestInit): Promise<T> {
   const isForm = typeof FormData !== "undefined" && options?.body instanceof FormData;
