@@ -1,44 +1,152 @@
 @import "tailwindcss";
+@import "@heroui/styles";
 
-@theme inline {
-  --color-canvas: #F4F6F8;
-  --color-surface: #FFFFFF;
-  --color-text-primary: #101828;
-  --color-text-secondary: #475467;
-  --color-border: #E4E7EC;
-  --color-accent: #0B6E8A;
-  --color-accent-strong: #084F63;
-  --color-accent-soft: #E6F2F6;
-  --color-success-fg: #067647;
-  --color-success-bg: #E7F6EE;
-  --color-warning-fg: #B54708;
-  --color-warning-bg: #FEF0E6;
-  --color-danger-fg: #B42318;
-  --color-danger-bg: #FEF3F2;
-  --color-chat-customer: #D7EEF5;
-  --color-stage-acquire-fg: #0F6A5E;
-  --color-stage-acquire-bg: #E3F5F1;
-  --color-stage-serve-fg: #1849A9;
-  --color-stage-serve-bg: #EAF1FD;
-  --color-stage-retain-fg: #6B2FA3;
-  --color-stage-retain-bg: #F3EAFB;
-  --color-sender-bot-fg: #475467;
-  --color-sender-bot-bg: #F2F4F7;
-  --color-sender-ai-fg: #0B6E8A;
-  --color-sender-ai-bg: #E6F2F6;
-  --font-heading: var(--font-heading);
-  --font-body: var(--font-body);
-  --radius-control: 8px;
-  --radius-card: 12px;
-  --radius-bubble: 16px;
+/*
+ * SevaAI design tokens.
+ * HeroUI v3 reads the raw variables below (--accent, --surface, ...), and its
+ * own @theme maps them to bg-accent, bg-surface, border-border, etc. We only
+ * add the brand tokens HeroUI does not have.
+ */
+:root {
+  --accent: #147d70;
+  --accent-foreground: #ffffff;
+  --accent-soft: #e3f3ef;
+  --accent-soft-foreground: #0d5a52;
+  --background: #f3f7f6;
+  --foreground: #142d31;
+  --muted: #607679;
+  --surface: #ffffff;
+  --surface-foreground: #142d31;
+  --surface-secondary: #f6faf9;
+  --surface-tertiary: #eef4f2;
+  --border: #e0eae7;
+  --separator: #e8efed;
+  --focus: #147d70;
+  --link: #147d70;
+  --success: #1f9d6b;
+  --warning: #d97706;
+  --danger: #d92d20;
+  --field-background: #ffffff;
+  --field-border: #dce6e3;
+  --field-border-width: 1px;
+  --field-placeholder: #8a9c9e;
+  --radius: 0.75rem;
+  --field-radius: 0.75rem;
+  --surface-shadow: 0 1px 2px rgba(16, 45, 49, 0.04), 0 8px 24px -12px rgba(16, 45, 49, 0.08);
+  --overlay-shadow: 0 24px 48px -12px rgba(9, 44, 53, 0.25);
 }
 
-html, body {
-  background: #F4F6F8;
-  color: #101828;
-  font-family: var(--font-body), Inter, sans-serif;
+@theme inline {
+  --color-canvas: #f3f7f6;
+  --color-ink: #092c35;
+  --color-mint: #b8f1df;
+  --color-mint-strong: #8fe4cc;
+  --color-text-primary: #142d31;
+  --color-text-secondary: #607679;
+  --color-accent-strong: #0d5a52;
+  --color-accent-soft: #e3f3ef;
+  --color-success-fg: #067647;
+  --color-success-bg: #e7f6ee;
+  --color-warning-fg: #b54708;
+  --color-warning-bg: #fef0e6;
+  --color-danger-fg: #b42318;
+  --color-danger-bg: #fef3f2;
+  --color-chat-customer: #12383c;
+  --color-stage-acquire-fg: #147d70;
+  --color-stage-acquire-bg: #e3f3ef;
+  --color-stage-serve-fg: #3168a7;
+  --color-stage-serve-bg: #eaf1fa;
+  --color-stage-retain-fg: #8a5ca8;
+  --color-stage-retain-bg: #f4ecf8;
+  --color-sender-bot-fg: #475467;
+  --color-sender-bot-bg: #f2f4f7;
+  --font-heading: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --radius-control: 10px;
+  --radius-card: 16px;
+  --radius-bubble: 18px;
+  --shadow-soft: 0 1px 2px rgba(16, 45, 49, 0.04), 0 8px 24px -12px rgba(16, 45, 49, 0.1);
+  --shadow-lift: 0 2px 4px rgba(16, 45, 49, 0.04), 0 18px 40px -16px rgba(16, 45, 49, 0.18);
+  --animate-shimmer: shimmer 2.2s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 1.8s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+
+  @keyframes shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes pulse-ring {
+    0% { box-shadow: 0 0 0 0 color-mix(in oklab, currentColor 45%, transparent); }
+    100% { box-shadow: 0 0 0 8px transparent; }
+  }
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
   margin: 0;
+  background-color: var(--background);
+  /* Soft brand glow at the top of every page. */
+  background-image:
+    radial-gradient(1200px 480px at 10% -10%, rgba(143, 228, 204, 0.22), transparent 60%),
+    radial-gradient(900px 420px at 95% -5%, rgba(49, 104, 167, 0.08), transparent 60%);
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #b8e9db;
+  color: #092c35;
+}
+
+@utility glass {
+  background-color: color-mix(in oklab, white 72%, transparent);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(120deg, #092c35 0%, #147d70 55%, #3fb59c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility shimmer-bg {
+  background-image: linear-gradient(90deg, #eef4f2 0%, #f8fbfa 40%, #eef4f2 80%);
+  background-size: 200% 100%;
+  animation: var(--animate-shimmer);
+}
+
+@utility dot-grid {
+  background-image: radial-gradient(rgba(20, 125, 112, 0.14) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

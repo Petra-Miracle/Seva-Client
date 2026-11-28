@@ -60,3 +60,171 @@
  GET /chat 200 in 122ms (next.js: 7ms, application-code: 114ms)
  GET /chat 200 in 91ms (next.js: 1.9ms, application-code: 89ms)
  GET /dashboard 200 in 67ms (next.js: 2ms, application-code: 65ms)
+ GET /chat 200 in 653ms (next.js: 53ms, application-code: 600ms)
+ GET /chat 200 in 113ms (next.js: 2ms, application-code: 111ms)
+ GET /chat 200 in 201ms (next.js: 2ms, application-code: 199ms)
+ GET /dashboard 200 in 126ms (next.js: 6ms, application-code: 121ms)
+✓ Compiled in 465ms
+ GET /dashboard 200 in 161ms (next.js: 14ms, application-code: 147ms)
+ GET /dashboard 200 in 193ms (next.js: 12ms, application-code: 181ms)
+✓ Compiled in 182ms
+ GET /dashboard 404 in 876ms (next.js: 823ms, application-code: 52ms)
+ GET /dashboard 404 in 87ms (next.js: 22ms, application-code: 65ms)
+✓ Compiled in 621ms
+ GET /dashboard 200 in 278ms (next.js: 28ms, application-code: 250ms)
+ GET /dashboard 200 in 316ms (next.js: 2.0ms, application-code: 314ms)
+ GET /dashboard 200 in 55ms (next.js: 11ms, application-code: 45ms)
+✓ Compiled in 241ms
+ GET /dashboard 200 in 158ms (next.js: 22ms, application-code: 136ms)
+ GET /dashboard 200 in 177ms (next.js: 5ms, application-code: 172ms)
+ GET /inbox 200 in 46ms (next.js: 5ms, application-code: 42ms)
+✓ Compiled in 160ms
+ GET /inbox 200 in 148ms (next.js: 3ms, application-code: 145ms)
+ GET /campaigns 200 in 98ms (next.js: 24ms, application-code: 74ms)
+○ Compiling /chat ...
+ GET /chat 200 in 713ms (next.js: 47ms, application-code: 666ms)
+ GET /chat 200 in 102ms (next.js: 3ms, application-code: 98ms)
+ GET /chat 200 in 471ms (next.js: 24ms, application-code: 447ms)
+ GET /dashboard 200 in 187ms (next.js: 6ms, application-code: 181ms)
+ GET /inbox 200 in 152ms (next.js: 10ms, application-code: 142ms)
+ GET /campaigns 200 in 206ms (next.js: 11ms, application-code: 195ms)
+ GET /tickets 200 in 344ms (next.js: 84ms, application-code: 260ms)
+✓ Compiled in 536ms
+ GET /chat 200 in 190ms (next.js: 10ms, application-code: 180ms)
+✓ Compiled in 284ms
+ GET /chat 200 in 431ms (next.js: 19ms, application-code: 412ms)
+ GET /chat 200 in 91ms (next.js: 4ms, application-code: 87ms)
+ GET /chat 200 in 120ms (next.js: 6ms, application-code: 115ms)
+ GET /dashboard 200 in 80ms (next.js: 5ms, application-code: 75ms)
+ GET /chat 200 in 325ms (next.js: 20ms, application-code: 305ms)
+ GET /dashboard 200 in 94ms (next.js: 3ms, application-code: 91ms)
+ GET /dashboard 200 in 78ms (next.js: 2ms, application-code: 75ms)
+ GET /chat 200 in 228ms (next.js: 6ms, application-code: 222ms)
+ GET /campaigns 200 in 142ms (next.js: 8ms, application-code: 134ms)
+ GET /dashboard 200 in 122ms (next.js: 10ms, application-code: 112ms)
+ GET /inbox 200 in 179ms (next.js: 13ms, application-code: 166ms)
+ GET /campaigns 200 in 91ms (next.js: 12ms, application-code: 78ms)
+ GET /tickets 200 in 163ms (next.js: 5ms, application-code: 158ms)
+ GET /knowledge 200 in 443ms (next.js: 202ms, application-code: 242ms)
+ GET /chat 200 in 305ms (next.js: 7ms, application-code: 298ms)
+✓ Compiled in 273ms
+✓ Compiled in 383ms
+ GET /chat 200 in 527ms (next.js: 26ms, application-code: 501ms)
+ GET /chat 200 in 97ms (next.js: 4ms, application-code: 93ms)
+ GET /chat 200 in 103ms (next.js: 2ms, application-code: 100ms)
+ GET /chat 200 in 105ms (next.js: 2ms, application-code: 103ms)
+ GET /dashboard 200 in 86ms (next.js: 6ms, application-code: 80ms)
+ GET /chat 200 in 104ms (next.js: 2ms, application-code: 102ms)
+ GET /dashboard 200 in 45ms (next.js: 3ms, application-code: 43ms)
+ GET /inbox 200 in 54ms (next.js: 3ms, application-code: 50ms)
+ GET /tickets 200 in 55ms (next.js: 2ms, application-code: 52ms)
+ GET /campaigns 200 in 73ms (next.js: 3ms, application-code: 70ms)
+ GET /chat 200 in 90ms (next.js: 3ms, application-code: 87ms)
+ GET /chat 200 in 115ms (next.js: 2ms, application-code: 113ms)
+✓ Compiled in 1487ms
+✓ Compiled in 325ms
+ GET /knowledge 200 in 947ms (next.js: 76ms, application-code: 871ms)
+ GET /knowledge 200 in 308ms (next.js: 4ms, application-code: 304ms)
+ GET /chat 200 in 252ms (next.js: 13ms, application-code: 239ms)
+ GET /inbox 200 in 173ms (next.js: 5ms, application-code: 168ms)
+ GET /campaigns 200 in 223ms (next.js: 12ms, application-code: 211ms)
+ GET /chat 200 in 161ms (next.js: 7ms, application-code: 154ms)
+ GET /knowledge 200 in 109ms (next.js: 1.8ms, application-code: 107ms)
+ GET /dashboard 200 in 51ms (next.js: 5ms, application-code: 46ms)
+ GET /inbox 200 in 108ms (next.js: 3ms, application-code: 105ms)
+ GET /tickets 200 in 69ms (next.js: 4ms, application-code: 65ms)
+ GET /inbox 200 in 82ms (next.js: 5ms, application-code: 78ms)
+ GET / 307 in 159ms (next.js: 25ms, application-code: 134ms)
+ GET /dashboard 200 in 156ms (next.js: 4ms, application-code: 152ms)
+ GET /chat 200 in 110ms (next.js: 3ms, application-code: 107ms)
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (0.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\lucide-react\\dist\\esm\\icons\\calendar-cog.js").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (1.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\lucide-react\\dist\\esm\\icons\\hand-metal.js").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (3.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\lucide-react\\dist\\esm\\icons\\arrow-right-from-line.js.map").
+  Turbopack has seen frequent file updates and is waiting for the filesystem to settle (7.5s elapsed so far; last modified: "\\\\?\\D:\\Seva-Client\\node_modules\\lucide-react\\dist\\esm\\icons\\youtube.js.map").
+✓ Compiled in 590ms
+✓ Compiled in 767ms
+✓ Compiled in 1633ms
+ GET /chat 200 in 148ms (next.js: 27ms, application-code: 122ms)
+ GET /dashboard 200 in 239ms (next.js: 28ms, application-code: 210ms)
+ GET /inbox 200 in 63ms (next.js: 6ms, application-code: 56ms)
+✓ Compiled in 308ms
+ GET /inbox 200 in 854ms (next.js: 4ms, application-code: 850ms)
+ GET /chat 200 in 838ms (next.js: 4ms, application-code: 834ms)
+ GET /dashboard 200 in 413ms (next.js: 6ms, application-code: 407ms)
+✓ Compiled in 340ms
+ GET /inbox 200 in 332ms (next.js: 3ms, application-code: 329ms)
+ GET /chat 200 in 316ms (next.js: 1.8ms, application-code: 314ms)
+ GET /dashboard 200 in 148ms (next.js: 9ms, application-code: 138ms)
+✓ Compiled in 237ms
+✓ Compiled in 136ms
+✓ Compiled in 125ms
+✓ Compiled in 4.8s
+ GET /chat 200 in 203ms (next.js: 33ms, application-code: 170ms)
+ GET /dashboard 200 in 259ms (next.js: 56ms, application-code: 203ms)
+ GET /inbox 200 in 596ms (next.js: 442ms, application-code: 154ms)
+ GET /inbox 200 in 736ms (next.js: 32ms, application-code: 704ms)
+ GET /dashboard 200 in 256ms (next.js: 4ms, application-code: 251ms)
+✓ Compiled in 260ms
+ GET /chat 200 in 157ms (next.js: 5ms, application-code: 152ms)
+ GET /inbox 200 in 543ms (next.js: 5ms, application-code: 537ms)
+✓ Compiled in 654ms
+ GET /dashboard 200 in 178ms (next.js: 7ms, application-code: 171ms)
+ GET /dashboard 200 in 132ms (next.js: 3ms, application-code: 129ms)
+ GET /inbox 200 in 128ms (next.js: 5ms, application-code: 123ms)
+ GET /chat 200 in 102ms (next.js: 4ms, application-code: 98ms)
+✓ Compiled in 902ms
+✓ Compiled in 139ms
+✓ Compiled in 811ms
+✓ Compiled in 147ms
+✓ Compiled in 136ms
+✓ Compiled in 147ms
+✓ Compiled in 123ms
+✓ Compiled in 559ms
+✓ Compiled in 466ms
+✓ Compiled in 477ms
+✓ Compiled in 1142ms
+ GET /inbox 200 in 523ms (next.js: 56ms, application-code: 467ms)
+ GET /dashboard 200 in 228ms (next.js: 48ms, application-code: 180ms)
+ GET /chat 200 in 73ms (next.js: 12ms, application-code: 61ms)
+▲ Next.js 16.4.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.94.52.185:3000
+- Environments: .env.local
+✓ Ready in 1638ms
+✓ Running next.config.ts took 221ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+○ Compiling /dashboard ...
+ GET /chat 200 in 1743ms (next.js: 451ms, application-code: 1293ms)
+ GET /inbox 200 in 1246ms (next.js: 36ms, application-code: 1210ms)
+ GET /dashboard 200 in 392ms (next.js: 17ms, application-code: 375ms)
+✓ Compiled in 210ms
+✓ Compiled in 466ms
+✓ Compiled in 227ms
+✓ Compiled in 161ms
+✓ Compiled in 151ms
+✓ Compiled in 127ms
+✓ Compiled in 197ms
+✓ Compiled in 263ms
+✓ Compiled in 192ms
+✓ Compiled in 258ms
+✓ Compiled in 348ms
+ GET /dashboard 200 in 112ms (next.js: 6ms, application-code: 106ms)
+ GET /inbox 200 in 96ms (next.js: 4ms, application-code: 92ms)
+ GET /tickets 200 in 153ms (next.js: 22ms, application-code: 132ms)
+ GET /campaigns 200 in 177ms (next.js: 20ms, application-code: 157ms)
+ GET /knowledge 200 in 140ms (next.js: 19ms, application-code: 121ms)
+ GET /chat 200 in 87ms (next.js: 3ms, application-code: 84ms)
+ GET /chat 200 in 152ms (next.js: 5ms, application-code: 147ms)
+ GET /dashboard 200 in 95ms (next.js: 14ms, application-code: 81ms)
+ GET /chat 200 in 97ms (next.js: 6ms, application-code: 91ms)
+ GET /chat 200 in 166ms (next.js: 6ms, application-code: 160ms)
+ GET /chat 200 in 97ms (next.js: 2.0ms, application-code: 95ms)
+ GET /chat 200 in 95ms (next.js: 3ms, application-code: 92ms)
+ GET /chat 200 in 158ms (next.js: 5ms, application-code: 154ms)
+ GET /inbox 200 in 69ms (next.js: 3ms, application-code: 66ms)
+ GET /campaigns 200 in 49ms (next.js: 4ms, application-code: 45ms)
+ GET /knowledge 200 in 46ms (next.js: 5ms, application-code: 42ms)
+✓ Compiled in 240ms
+✓ Compiled in 253ms
