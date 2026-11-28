@@ -22,7 +22,8 @@ export type ChatAction = { button: string; label: string };
 type Area = { id: string; city: string; district: string; village: string; isCovered: boolean };
 type Pkg = { id: string; name: string; speedMbps: number; monthlyPrice: number; installFee: number };
 type Payload = {
-  buttons?: string[];
+  /** New flows send { id, label }; older messages carry plain labels. */
+  buttons?: Array<string | { id: string; label: string }>;
   areas?: Area[];
   packages?: Pkg[];
   slots?: boolean;
@@ -62,8 +63,10 @@ const BUTTON_IDS: Record<string, string> = {
   "cek tagihan": "cek_tagihan",
 };
 
-const toButtonId = (label: string) =>
-  BUTTON_IDS[label.trim().toLowerCase()] ?? label.trim().toLowerCase().replace(/\s+/g, "_");
+const toButton = (b: string | { id: string; label: string }) =>
+  typeof b === "string"
+    ? { id: BUTTON_IDS[b.trim().toLowerCase()] ?? b.trim().toLowerCase().replace(/\s+/g, "_"), label: b }
+    : b;
 
 /** True when the message carries structured content worth rendering as more than text. */
 export function isRich(message: ChatMessage) {
@@ -111,20 +114,20 @@ export default function RichContent({
       <div>
         <p>{message.content}</p>
         <div className="mt-3 flex flex-wrap gap-2">
-          {p.buttons.map((label) =>
+          {p.buttons.map(toButton).map(({ id, label }) =>
             interactive ? (
               <Button
-                key={label}
+                key={id}
                 size="sm"
                 variant="secondary"
                 isDisabled={disabled}
-                onPress={() => onAction?.({ button: toButtonId(label), label })}
+                onPress={() => onAction?.({ button: id, label })}
                 className="rounded-full border border-accent/25 bg-white font-semibold text-accent hover:bg-accent-soft"
               >
                 {label}
               </Button>
             ) : (
-              <span key={label} className="rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold text-text-secondary">
+              <span key={id} className="rounded-full border border-border bg-white px-3 py-1 text-xs font-semibold text-text-secondary">
                 {label}
               </span>
             ),

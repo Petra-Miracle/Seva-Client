@@ -1,4 +1,3 @@
-
 # Prompt Build Sistem — SevaAI
 
 > Salin seluruh isi di bawah garis ini ke AI coding agent kamu.
@@ -323,4 +322,4 @@ Tulis checklist ini di `TESTING.md`.
 - [ ] Tidak ada secret di repo; `.env.example` lengkap; README berisi cara setup ≤ 10 langkah.
 - [ ] 11 skenario di bagian 8 lolos.
 - [ ] Dashboard menunjukkan metrik ketiga tahap dan persentase pesan yang memakai AI.
-- [ ] Semua data adalah data demo; tidak ada data pelanggan asli yang dikirim ke Gemini.
+- [ ] Semua data adalah data demo; tidak ada data pelanggan asli yang dikirim ke Gemini
