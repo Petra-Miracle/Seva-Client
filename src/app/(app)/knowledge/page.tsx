@@ -118,14 +118,14 @@ function Knowledge({ partnerId }: { partnerId: string }) {
 
       <AnimatePresence mode="wait">
         {tab === "faq" ? (
-          <motion.div key="faq" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="grid gap-5 lg:grid-cols-[260px_1fr]">
-            <Card className="h-fit border border-border/80 p-4 shadow-soft lg:sticky lg:top-24">
+          <motion.div key="faq" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="grid min-w-0 gap-5 lg:grid-cols-[260px_1fr]">
+            <Card className="h-fit min-w-0 border border-border/80 p-4 shadow-soft lg:sticky lg:top-24">
               <div className="relative">
                 <Search className="pointer-events-none absolute left-3 top-1/2 z-10 size-4 -translate-y-1/2 text-text-secondary" />
                 <Input aria-label="Cari FAQ" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Cari pertanyaan…" className="w-full pl-9" />
               </div>
               <p className="mb-2 mt-4 px-1 text-[11px] font-bold uppercase tracking-[0.14em] text-text-secondary">Kategori</p>
-              <div className="no-scrollbar flex gap-1 overflow-x-auto lg:flex-col">
+              <div className="flex flex-wrap gap-1 lg:flex-col">
                 {["ALL", ...categories].map((c) => {
                   const active = category === c;
                   const count = c === "ALL" ? faqs?.length ?? 0 : faqs?.filter((f) => f.category === c).length ?? 0;
@@ -147,7 +147,7 @@ function Knowledge({ partnerId }: { partnerId: string }) {
               </div>
             </Card>
 
-            <div className="space-y-2.5">
+            <div className="min-w-0 space-y-2.5">
               {!faqs && !error && <Card className="p-5"><SkeletonRows rows={5} /></Card>}
               {faqs && visibleFaqs.length === 0 && (
                 <Card className="border border-border/80 shadow-soft">

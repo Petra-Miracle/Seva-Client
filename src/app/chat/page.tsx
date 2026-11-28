@@ -8,6 +8,7 @@ import {
   ArrowLeft,
   ArrowUp,
   Bot,
+  Check,
   CircleHelp,
   Headset,
   Mic,
@@ -16,9 +17,12 @@ import {
   ReceiptText,
   RefreshCw,
   Rocket,
+  SlidersHorizontal,
   Sparkles,
   Square,
+  UserRound,
   Wifi,
+  X,
 } from "lucide-react";
 import { usePartner } from "@/hooks/usePartner";
 import { useInterval } from "@/hooks/useInterval";
@@ -79,6 +83,8 @@ export default function ChatPage() {
   return <Chat key={partnerId} />;
 }
 
+const nowIso = () => new Date().toISOString();
+
 function Chat() {
   const { partnerId, setPartnerId, partners, loading: partnersLoading, error: partnerError, reload: reloadPartners } = usePartner();
   const [session, setSession] = useState<{ partnerId: string; id: string } | null>(null);
@@ -90,11 +96,13 @@ function Chat() {
   const [profile, setProfile] = useState("baru");
   const [recording, setRecording] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
   const chunks = useRef<Blob[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const pendingSeq = useRef(0);
   const conversationId = session?.partnerId === partnerId ? session.id : null;
   const visibleMessages = useMemo(() => (conversationId ? messages : []), [conversationId, messages]);
   const creatingSession = Boolean(partnerId && !conversationId && sessionFailure?.partnerId !== partnerId);
@@ -162,17 +170,33 @@ function Chat() {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
   }, [visibleMessages, sending]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   useInterval(() => setRecording((s) => (s == null ? s : s + 1)), recording != null ? 1000 : null);
 
   const post = async (body: Record<string, string>) => {
     if (!conversationId || sending) return;
     setSending(true);
     setError(null);
+    // Show the customer's bubble right away; the server copy replaces it on refresh.
+    const pendingId = `pending-${++pendingSeq.current}`;
+    const shown = body.text ?? body.label;
+    if (shown) {
+      setMessages((current) => [...current, { id: pendingId, sender: "CUSTOMER", type: "TEXT", content: shown, createdAt: nowIso() }]);
+    }
     try {
       await api(`/api/chat/${conversationId}/messages`, { method: "POST", body: JSON.stringify(body) });
       await refresh(conversationId);
       return true;
     } catch (cause) {
+      setMessages((current) => current.filter((m) => m.id !== pendingId));
       setError(errorMessage(cause, "Pesan gagal dikirim."));
       return false;
     } finally {
@@ -244,6 +268,17 @@ function Chat() {
 
   const partnerName = partners.find((partner) => partner.id === partnerId)?.name || "Pilih mitra";
   const statusInfo = CONVERSATION_STATUS[status] ?? CONVERSATION_STATUS.BOT;
+  const headerSubtitle = creatingSession
+    ? "Menyiapkan percakapan…"
+    : !conversationId
+      ? "Menunggu koneksi"
+      : status === "NEEDS_HUMAN"
+        ? "Menghubungkan ke tim CS…"
+        : status === "HUMAN"
+          ? "Dilayani tim CS"
+          : status === "CLOSED"
+            ? "Percakapan selesai"
+            : "Asisten virtual · online";
   const lastBotIndex = visibleMessages.findLastIndex((m) => m.sender !== "CUSTOMER");
   const customerMessages = visibleMessages.filter((m) => m.sender === "CUSTOMER");
 
@@ -333,40 +368,50 @@ function Chat() {
 
       {/* Main */}
       <main className="flex min-w-0 flex-1 flex-col">
-        <header className="glass z-10 flex h-16 shrink-0 items-center justify-between gap-3 border-b border-border/80 px-4 md:px-8">
-          <div className="flex min-w-0 items-center gap-3">
-            <Link href="/dashboard" aria-label="Kembali ke konsol" className="grid size-9 shrink-0 place-items-center rounded-xl text-text-secondary transition hover:bg-surface-tertiary lg:hidden">
-              <ArrowLeft className="size-5" />
-            </Link>
-            <span className="relative grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-mint to-mint-strong text-ink">
-              <Sparkles className="size-5" />
-              <span className="absolute -bottom-0.5 -right-0.5 size-3 rounded-full border-2 border-white bg-success" />
-            </span>
-            <div className="min-w-0">
-              <p className="truncate text-sm font-semibold text-text-primary">{partnerName}</p>
-              <p className="text-xs text-text-secondary">
-                {creatingSession ? "Menyiapkan percakapan…" : conversationId ? "Asisten virtual · biasanya membalas instan" : "Menunggu koneksi"}
-              </p>
-            </div>
+        <header className="z-10 flex h-16 shrink-0 items-center gap-2.5 border-b border-border/80 bg-surface/95 px-3 backdrop-blur-xl md:px-8">
+          <Link href="/dashboard" aria-label="Kembali ke konsol" className="grid size-9 shrink-0 place-items-center rounded-xl text-text-secondary transition hover:bg-surface-tertiary lg:hidden">
+            <ArrowLeft className="size-5" />
+          </Link>
+          <span className="relative grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-mint to-mint-strong text-ink">
+            <Sparkles className="size-5" />
+            <span
+              className={`absolute -bottom-0.5 -right-0.5 size-3 rounded-full border-2 border-white ${
+                status === "BOT" ? "bg-success" : status === "NEEDS_HUMAN" ? "bg-warning" : "bg-accent"
+              }`}
+            />
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-semibold text-text-primary">{partnerName}</p>
+            <p className="truncate text-[11px] text-text-secondary sm:text-xs">{headerSubtitle}</p>
           </div>
-          <div className="flex shrink-0 items-center gap-2">
-            <Pill tone={statusInfo.tone} dot pulse={status === "NEEDS_HUMAN"} className="hidden sm:inline-flex">
-              {statusInfo.label}
-            </Pill>
-            <span className="hidden rounded-full border border-border bg-white px-2.5 py-1 text-[11px] font-semibold text-text-secondary md:inline-flex">Data demo</span>
-            <div className="lg:hidden">
-              <AppSelect
-                ariaLabel="Profil pelanggan"
-                items={profiles.map((p) => ({ id: p.id, label: p.label }))}
-                value={profile}
-                onChange={(id) => id && void createSession(id)}
-                isDisabled={creatingSession || !partnerId}
-                className="w-[150px]"
-              />
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+            <div className="hidden sm:block">
+              <Pill tone={statusInfo.tone} dot pulse={status === "NEEDS_HUMAN"}>
+                {statusInfo.label}
+              </Pill>
             </div>
-            <Button isIconOnly size="sm" variant="secondary" aria-label="Percakapan baru" onPress={() => void createSession(profile)} isDisabled={creatingSession || !partnerId} className="lg:hidden">
+            <span className="hidden rounded-full border border-border bg-white px-2.5 py-1 text-[11px] font-semibold text-text-secondary md:inline-flex">Data demo</span>
+            <Button
+              isIconOnly
+              size="sm"
+              variant="secondary"
+              aria-label="Percakapan baru"
+              onPress={() => void createSession(profile)}
+              isDisabled={creatingSession || !partnerId}
+              className="lg:hidden"
+            >
               <Plus className="size-4" />
             </Button>
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Pengaturan percakapan"
+              aria-expanded={menuOpen}
+              aria-controls="chat-settings"
+              className="grid size-9 shrink-0 place-items-center rounded-xl border border-border bg-surface text-text-secondary transition hover:bg-surface-tertiary hover:text-text-primary lg:hidden"
+            >
+              <SlidersHorizontal className="size-[18px]" />
+            </button>
           </div>
         </header>
 
@@ -385,7 +430,7 @@ function Chat() {
               <div className="my-auto w-full py-6">
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }} className="mx-auto max-w-[560px] text-center">
                   <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.2em] text-accent">Asisten virtual {partnerName}</p>
-                  <h1 className="font-heading text-3xl font-semibold leading-tight tracking-tight md:text-[40px]">
+                  <h1 className="font-heading text-[28px] font-semibold leading-tight tracking-tight sm:text-3xl md:text-[40px]">
                     Halo, ada yang bisa <span className="text-gradient">kami bantu?</span>
                   </h1>
                   <p className="mx-auto mt-3 max-w-md text-sm leading-6 text-text-secondary md:text-base">
@@ -507,7 +552,7 @@ function Chat() {
         </div>
 
         {/* Composer */}
-        <div className="shrink-0 px-4 pb-4 pt-2 md:px-8 md:pb-6">
+        <div className="shrink-0 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2 md:px-8 md:pb-6">
           <div className="mx-auto max-w-[820px]">
             <AnimatePresence>
               {error && (
@@ -605,6 +650,115 @@ function Chat() {
           </div>
         </div>
       </main>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className="fixed inset-0 z-50 lg:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={() => setMenuOpen(false)} aria-hidden="true" />
+            <motion.div
+              id="chat-settings"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Pengaturan percakapan"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", stiffness: 360, damping: 36 }}
+              className="absolute inset-x-0 bottom-0 max-h-[85dvh] overflow-y-auto rounded-t-3xl border-t border-border bg-surface p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-2xl"
+            >
+              <div className="mx-auto mb-4 h-1.5 w-10 rounded-full bg-border" />
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-accent">Pengaturan</p>
+                  <h2 className="mt-1 font-heading text-lg font-semibold text-text-primary">Percakapan</h2>
+                  <p className="mt-0.5 text-xs text-text-secondary">Pilih mitra dan profil pelanggan untuk simulasi.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setMenuOpen(false)}
+                  aria-label="Tutup pengaturan"
+                  autoFocus
+                  className="grid size-9 shrink-0 place-items-center rounded-xl border border-border text-text-secondary transition hover:bg-surface-tertiary hover:text-text-primary"
+                >
+                  <X className="size-4" />
+                </button>
+              </div>
+
+              <div className="mt-5 space-y-2">
+                <p className="text-xs font-semibold text-text-primary">Mitra</p>
+                <AppSelect
+                  ariaLabel="Pilih mitra"
+                  items={partners.map((partner) => ({ id: partner.id, label: partner.name }))}
+                  value={partnerId}
+                  onChange={(id) => {
+                    if (!id) return;
+                    setPartnerId(id);
+                    setMenuOpen(false);
+                  }}
+                  isDisabled={partnersLoading || partners.length === 0}
+                  placeholder={partnersLoading ? "Memuat mitra…" : "Pilih mitra"}
+                  className="w-full"
+                />
+              </div>
+
+              <div className="mt-5">
+                <p className="text-xs font-semibold text-text-primary">Simulasikan sebagai</p>
+                <div className="mt-2 space-y-2">
+                  {profiles.map((item) => {
+                    const active = profile === item.id;
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        aria-pressed={active}
+                        disabled={creatingSession || !partnerId}
+                        onClick={() => {
+                          setMenuOpen(false);
+                          void createSession(item.id);
+                        }}
+                        className={`flex w-full items-center gap-3 rounded-2xl border p-3 text-left transition disabled:opacity-50 ${
+                          active ? "border-accent/30 bg-accent-soft/60" : "border-border bg-surface hover:bg-surface-secondary"
+                        }`}
+                      >
+                        <span className={`grid size-9 shrink-0 place-items-center rounded-xl ${active ? "bg-accent text-white" : "bg-surface-tertiary text-text-secondary"}`}>
+                          {active ? <Check className="size-4" /> : <UserRound className="size-4" />}
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-sm font-semibold text-text-primary">{item.label}</span>
+                          <span className="block text-xs text-text-secondary">{item.hint}</span>
+                        </span>
+                        {active && <Pill tone="accent" size="xs">Aktif</Pill>}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <Button
+                className="mt-5 h-11 w-full rounded-xl"
+                variant="primary"
+                onPress={() => {
+                  setMenuOpen(false);
+                  void createSession(profile);
+                }}
+                isDisabled={creatingSession || !partnerId}
+              >
+                <Plus className="size-4" />
+                Percakapan baru
+              </Button>
+              <p className="mt-3 text-center text-[11px] leading-4 text-text-secondary">
+                Data demo · percakapan ini tidak memengaruhi pelanggan sungguhan.
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

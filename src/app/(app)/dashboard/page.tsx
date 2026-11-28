@@ -114,14 +114,14 @@ function KpiCard({
   }[tone];
   return (
     <SpotlightCard className="h-full">
-      <div className="p-5">
+      <div className="p-4 sm:p-5">
         <div className="flex items-start justify-between gap-3">
           <p className="text-sm font-medium text-text-secondary">{label}</p>
           <span className={`grid size-10 shrink-0 place-items-center rounded-xl bg-gradient-to-b ring-1 ring-inset ring-black/[0.04] ${toneClass}`}>
             {icon}
           </span>
         </div>
-        <p className="mt-2 font-heading text-[34px] font-semibold leading-none tracking-tight text-text-primary">
+        <p className="mt-2 font-heading text-[30px] font-semibold leading-none tracking-tight text-text-primary sm:text-[34px]">
           <AnimatedNumber value={value} suffix={suffix} />
         </p>
         <div className="mt-4 flex items-center gap-2 border-t border-dashed border-border pt-3 text-xs text-text-secondary">
@@ -451,7 +451,7 @@ export default function DashboardPage() {
                 ))}
               </div>
             </div>
-            <div className="relative h-[280px]">
+            <div className="relative h-[240px] sm:h-[280px]">
               {data && hasTrend ? (
                 <Line data={lineData} options={lineOptions} aria-label="Grafik tren pesan harian" role="img" />
               ) : (

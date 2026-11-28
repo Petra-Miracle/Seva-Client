@@ -158,7 +158,7 @@ export function SegmentedControl<T extends string>({
     <div
       role="tablist"
       aria-label={ariaLabel}
-      className={`no-scrollbar relative flex max-w-full items-center gap-1 overflow-x-auto rounded-2xl border border-border bg-surface-secondary/80 p-1 ${className}`}
+      className={`no-scrollbar relative flex max-w-full flex-wrap items-center gap-1 rounded-2xl border border-border bg-surface-secondary/80 p-1 ${className}`}
     >
       {options.map((option) => {
         const active = option.value === value;
