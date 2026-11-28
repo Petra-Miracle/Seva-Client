@@ -24,7 +24,7 @@ import { usePartner } from "@/hooks/usePartner";
 import { useInterval } from "@/hooks/useInterval";
 import { api, errorMessage, isAbort } from "@/lib/api";
 import { clock, CONVERSATION_STATUS } from "@/lib/format";
-import { Logo } from "@/components/layout/AppHeader";
+import { Logo } from "@/components/layout/Logo";
 import AppSelect from "@/components/ui/AppSelect";
 import Pill from "@/components/ui/Pill";
 import RichContent, { isRich, type ChatAction, type ChatMessage } from "@/components/chat/RichContent";

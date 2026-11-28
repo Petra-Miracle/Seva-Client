@@ -273,7 +273,7 @@ function Inbox({ partnerId }: { partnerId: string }) {
   const stage = detail ? STAGE[detail.stage] : null;
 
   return (
-    <div className="grid h-[calc(100dvh-8.5rem)] min-h-[560px] gap-4 lg:h-[calc(100dvh-6.5rem)] lg:grid-cols-[340px_1fr] 2xl:grid-cols-[360px_1fr_300px]">
+    <div className="grid h-[calc(100dvh-7rem)] min-h-[560px] gap-4 lg:h-[calc(100dvh-4rem)] lg:grid-cols-[340px_1fr] 2xl:grid-cols-[360px_1fr_300px]">
       {/* Conversation list */}
       <section
         className={`flex min-h-0 flex-col overflow-hidden rounded-card border border-border/80 bg-surface shadow-soft ${selectedId ? "hidden lg:flex" : "flex"}`}
